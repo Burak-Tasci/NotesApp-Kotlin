@@ -22,14 +22,23 @@
             android:id="@+id/recycler_notes"
             android:layout_width="match_parent"
             android:layout_height="680dp"
-            android:clipToPadding="true"
             android:adjustViewBounds="true"
+            android:clipToPadding="true"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/search"
-/>
+            app:layout_constraintTop_toBottomOf="@id/search" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/add_note_fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin"
+            android:layout_marginBottom="@dimen/margin"
+            android:src="@drawable/ic_baseline_create_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
