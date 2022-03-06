@@ -5,7 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
 import com.tsci.notesapp.databinding.FragmentNotesBinding
+import com.tsci.notesapp.ui.adapter.NoteGridAdapter
 
 
 class NotesFragment : Fragment() {
@@ -28,14 +30,16 @@ class NotesFragment : Fragment() {
         _binding = FragmentNotesBinding.inflate(inflater, container, false)
         val view = binding.root
         return view
-
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
+        binding.recyclerNotes.apply {
+            layoutManager = GridLayoutManager(context, 2)
+            adapter = NoteGridAdapter()
+        }
     }
 
 
