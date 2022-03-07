@@ -9,8 +9,8 @@ import java.util.*
 data class Note(
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0,
-    @ColumnInfo(name = "text")
+    @ColumnInfo(name = "note_text")
     val noteText: String,
-    @ColumnInfo(name = "date")
+    @ColumnInfo(name = "note_date")
     val noteDate: Date
 )
