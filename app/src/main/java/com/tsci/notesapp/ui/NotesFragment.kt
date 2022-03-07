@@ -12,6 +12,7 @@ import com.tsci.notesapp.AppViewModelFactory
 import com.tsci.notesapp.NotesApplication
 import com.tsci.notesapp.databinding.FragmentNotesBinding
 import com.tsci.notesapp.ui.adapter.NoteGridAdapter
+import java.util.*
 
 
 class NotesFragment : Fragment() {
@@ -27,9 +28,6 @@ class NotesFragment : Fragment() {
     // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -46,9 +44,17 @@ class NotesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val noteAdapter = NoteGridAdapter()
+
         binding.recyclerNotes.apply {
             layoutManager = GridLayoutManager(context, 2)
-            adapter = NoteGridAdapter()
+            adapter = noteAdapter
+        }
+
+        viewModel.allNotes.observe(this.viewLifecycleOwner) { notes ->
+            notes.let {
+                noteAdapter.submitList(it)
+            }
         }
     }
 
