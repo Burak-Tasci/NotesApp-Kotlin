@@ -40,6 +40,7 @@ class NoteGridAdapter : ListAdapter<Note,
 
     }
     companion object DiffCallback : DiffUtil.ItemCallback<Note>() {
+
         override fun areItemsTheSame(oldItem: Note, newItem: Note): Boolean {
             return oldItem == newItem
         }
