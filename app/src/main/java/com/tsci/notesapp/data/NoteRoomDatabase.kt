@@ -1,10 +1,13 @@
 package com.tsci.notesapp.data
 
 import android.content.Context
+import android.util.Log
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
+
+private const val TAG = "NoteRoomDatabase"
 
 @Database(entities = [Note::class], version = 1, exportSchema = false)
 @TypeConverters(Converters::class)
@@ -24,6 +27,8 @@ abstract class NoteRoomDatabase: RoomDatabase() {
                     "note_database")
                     .fallbackToDestructiveMigration()
                     .build()
+
+                Log.d(TAG, "Database created!")
                 INSTANCE = instance
                 return instance
             }
