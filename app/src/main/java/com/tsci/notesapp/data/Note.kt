@@ -1,4 +1,4 @@
-package com.tsci.notesapp.model
+package com.tsci.notesapp.data
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

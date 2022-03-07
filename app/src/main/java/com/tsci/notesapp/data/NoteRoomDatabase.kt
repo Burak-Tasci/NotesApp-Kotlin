@@ -1,11 +1,9 @@
-package com.tsci.notesapp.database
+package com.tsci.notesapp.data
 
-import android.content.ClipData
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.tsci.notesapp.model.Note
 
 @Database(entities = [Note::class], version = 1, exportSchema = false)
 abstract class NoteRoomDatabase: RoomDatabase() {

@@ -1,8 +1,6 @@
-package com.tsci.notesapp.database
+package com.tsci.notesapp.data
 
-import android.content.ClipData
 import androidx.room.*
-import com.tsci.notesapp.model.Note
 import kotlinx.coroutines.flow.Flow
 
 @Dao
