@@ -5,10 +5,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import com.tsci.notesapp.AppViewModel
+import com.tsci.notesapp.AppViewModelFactory
+import com.tsci.notesapp.NotesApplication
 import com.tsci.notesapp.databinding.EditNoteFragmentBinding
 
 
 class EditNoteFragment : Fragment() {
+
+    private val viewModel: AppViewModel by activityViewModels {
+        AppViewModelFactory(
+            (activity?.application as NotesApplication).database.noteDao()
+        )
+    }
 
     private var _binding: EditNoteFragmentBinding? = null
 

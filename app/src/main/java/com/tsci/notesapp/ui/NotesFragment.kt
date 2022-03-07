@@ -5,12 +5,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
+import com.tsci.notesapp.AppViewModel
+import com.tsci.notesapp.AppViewModelFactory
+import com.tsci.notesapp.NotesApplication
 import com.tsci.notesapp.databinding.FragmentNotesBinding
 import com.tsci.notesapp.ui.adapter.NoteGridAdapter
 
 
 class NotesFragment : Fragment() {
+
+    private val viewModel: AppViewModel by activityViewModels {
+        AppViewModelFactory(
+            (activity?.application as NotesApplication).database.noteDao()
+        )
+    }
 
     private var _binding: FragmentNotesBinding? = null
 
