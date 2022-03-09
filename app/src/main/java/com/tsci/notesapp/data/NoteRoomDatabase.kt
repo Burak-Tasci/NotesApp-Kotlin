@@ -9,7 +9,7 @@ import androidx.room.TypeConverters
 
 private const val TAG = "NoteRoomDatabase"
 
-@Database(entities = [Note::class], version = 1, exportSchema = false)
+@Database(entities = [Note::class], version = 2, exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class NoteRoomDatabase: RoomDatabase() {
 
