@@ -7,13 +7,19 @@ import java.util.*
 class Converters {
 
     @TypeConverter
-    fun fromTimestamp(value: Long?): Date? {
-        return value?.let { Date(it) }
+    fun toDate(value:Long):Date{
+        //If your result always returns 1970, then comment this line
+        //val date =  Date(value)
+
+        //If your result always returns 1970, then uncomment this line
+        val date = Date(value*1000L)
+
+        return date
     }
 
     @TypeConverter
-    fun dateToTimestamp(date: Date?): Long? {
-        return date?.time?.toLong()
+    fun fromDate(date:Date):Long{
+        return date.time
     }
 
 }
