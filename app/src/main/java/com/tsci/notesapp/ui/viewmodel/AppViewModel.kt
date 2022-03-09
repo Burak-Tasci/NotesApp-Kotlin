@@ -1,6 +1,5 @@
 package com.tsci.notesapp
 
-import android.content.ClipData
 import androidx.lifecycle.*
 import com.tsci.notesapp.data.NoteDao
 import com.tsci.notesapp.data.Note
@@ -13,11 +12,13 @@ class AppViewModel(private val noteDao: NoteDao) : ViewModel() {
     private fun getUpdatedNoteEntry(
         Id: Long,
         noteText: String,
+        noteTitle: String,
         noteDate: Date
     ): Note {
         return Note(
             id = Id,
             noteText = noteText,
+            noteTitle = noteTitle,
             noteDate = noteDate
         )
     }
@@ -25,9 +26,10 @@ class AppViewModel(private val noteDao: NoteDao) : ViewModel() {
     fun updateNote(
         Id: Long,
         noteText: String,
+        noteTitle: String,
         noteDate: Date
     ) {
-        val updatedNote = getUpdatedNoteEntry(Id, noteText, noteDate)
+        val updatedNote = getUpdatedNoteEntry(Id, noteTitle, noteText, noteDate)
         updateNote(updatedNote)
     }
 
@@ -52,15 +54,18 @@ class AppViewModel(private val noteDao: NoteDao) : ViewModel() {
         }
     }
     private fun getNewNoteEntry(noteText: String,
+                                noteTitle: String,
                                 noteDate: Date): Note {
         return Note(
             noteText = noteText,
+            noteTitle = noteTitle,
             noteDate = noteDate
         )
     }
     fun addNewNote(noteText: String,
+                   noteTitle: String,
                    noteDate: Date) {
-        val newNote = getNewNoteEntry(noteText, noteDate)
+        val newNote = getNewNoteEntry(noteTitle, noteText, noteDate)
         insertNote(newNote)
     }
     fun retrieveNote(id: Long): LiveData<Note>{
