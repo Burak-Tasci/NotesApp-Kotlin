@@ -1,18 +1,18 @@
 package com.tsci.notesapp.ui
 
+import android.R
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.tsci.notesapp.AppViewModel
 import com.tsci.notesapp.AppViewModelFactory
 import com.tsci.notesapp.NotesApplication
 import com.tsci.notesapp.databinding.FragmentNotesBinding
-import com.tsci.notesapp.ui.adapter.NoteGridAdapter
-import java.util.*
+import com.tsci.notesapp.ui.adapter.NoteAdapter
 
 
 class NotesFragment : Fragment() {
@@ -34,7 +34,6 @@ class NotesFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         _binding = FragmentNotesBinding.inflate(inflater, container, false)
         val view = binding.root
         return view
@@ -44,19 +43,17 @@ class NotesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val noteAdapter = NoteGridAdapter()
-
+        val noteAdapter = NoteAdapter()
         binding.recyclerNotes.apply {
-            layoutManager = GridLayoutManager(context, 2)
+            layoutManager = LinearLayoutManager(context)
             adapter = noteAdapter
         }
-
         viewModel.allNotes.observe(this.viewLifecycleOwner) { notes ->
             notes.let {
                 noteAdapter.submitList(it)
             }
         }
+
+
     }
-
-
 }
