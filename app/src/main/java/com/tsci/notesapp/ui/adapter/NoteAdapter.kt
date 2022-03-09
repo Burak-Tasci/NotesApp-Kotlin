@@ -5,8 +5,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.tsci.notesapp.databinding.NoteItemBinding
 import com.tsci.notesapp.data.Note
+import com.tsci.notesapp.databinding.NoteItemBinding
 
 class NoteGridAdapter : ListAdapter<Note,
         NoteGridAdapter.NoteViewHolder>(DiffCallback) {
@@ -18,7 +18,9 @@ class NoteGridAdapter : ListAdapter<Note,
 
         fun bind(note: Note){
 
-            binding.note =  note
+            binding.noteDate.text =  note.noteDate.time.toString()
+            binding.noteTitle.text = note.noteTitle
+            binding.noteBody.text = note.noteText
             binding.executePendingBindings()
         }
     }
