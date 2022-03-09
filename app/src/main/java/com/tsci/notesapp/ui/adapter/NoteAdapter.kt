@@ -1,5 +1,6 @@
 package com.tsci.notesapp.ui.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -7,9 +8,10 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.tsci.notesapp.data.Note
 import com.tsci.notesapp.databinding.NoteItemBinding
+import java.util.*
 
-class NoteGridAdapter : ListAdapter<Note,
-        NoteGridAdapter.NoteViewHolder>(DiffCallback) {
+class NoteAdapter : ListAdapter<Note,
+        NoteAdapter.NoteViewHolder>(DiffCallback) {
 
     class NoteViewHolder(
         private var binding: NoteItemBinding
@@ -17,26 +19,25 @@ class NoteGridAdapter : ListAdapter<Note,
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(note: Note){
-
-            binding.noteDate.text =  note.noteDate.time.toString()
+            Log.d("NoteAdapter", Date(note.noteDate.time).toString())
+            binding.noteDate.text =  note.noteDate.toString()
             binding.noteTitle.text = note.noteTitle
             binding.noteBody.text = note.noteText
-            binding.executePendingBindings()
         }
     }
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): NoteGridAdapter.NoteViewHolder {
+    ): NoteAdapter.NoteViewHolder {
         return NoteViewHolder(
             NoteItemBinding.inflate(
-                LayoutInflater.from(parent.context)
+                LayoutInflater.from(parent.context), parent, false
             )
         )
     }
 
-    override fun onBindViewHolder(holder: NoteGridAdapter.NoteViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: NoteAdapter.NoteViewHolder, position: Int) {
         val note = getItem(position)
         holder.bind(note)
 
