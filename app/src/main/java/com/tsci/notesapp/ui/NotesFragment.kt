@@ -1,18 +1,19 @@
 package com.tsci.notesapp.ui
 
-import android.R
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.tsci.notesapp.AppViewModel
-import com.tsci.notesapp.AppViewModelFactory
 import com.tsci.notesapp.NotesApplication
+import com.tsci.notesapp.R
 import com.tsci.notesapp.databinding.FragmentNotesBinding
 import com.tsci.notesapp.ui.adapter.NoteAdapter
+import com.tsci.notesapp.ui.viewmodel.AppViewModel
+import com.tsci.notesapp.ui.viewmodel.AppViewModelFactory
 
 
 class NotesFragment : Fragment() {
@@ -43,17 +44,22 @@ class NotesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val noteAdapter = NoteAdapter()
-        binding.recyclerNotes.apply {
+        val noteAdapter = NoteAdapter{
+            val action = NotesFragmentDirections.actionNotesFragmentToEditNoteFragment(it.id)
+            this.findNavController().navigate(action)
+        }
+        binding.recyclerNotes.apply{
             layoutManager = LinearLayoutManager(context)
             adapter = noteAdapter
         }
         viewModel.allNotes.observe(this.viewLifecycleOwner) { notes ->
             notes.let {
-                noteAdapter.submitList(it)
+                noteAdapter.submitList(it.sortedByDescending { it.noteDate })
             }
         }
-
-
+        binding.addNoteFab.setOnClickListener {
+            val action = NotesFragmentDirections.actionNotesFragmentToEditNoteFragment(-1L)
+            findNavController().navigate(action)
+        }
     }
 }
