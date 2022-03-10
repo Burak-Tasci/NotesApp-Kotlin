@@ -10,7 +10,7 @@ import com.tsci.notesapp.data.Note
 import com.tsci.notesapp.databinding.NoteItemBinding
 import java.util.*
 
-class NoteAdapter : ListAdapter<Note,
+class NoteAdapter(private val onItemClicked: (Note) -> Unit) : ListAdapter<Note,
         NoteAdapter.NoteViewHolder>(DiffCallback) {
 
     class NoteViewHolder(
@@ -20,9 +20,8 @@ class NoteAdapter : ListAdapter<Note,
 
         fun bind(note: Note){
             Log.d("NoteAdapter", Date(note.noteDate.time).toString())
-            binding.noteDate.text =  note.noteDate.toString()
-            binding.noteTitle.text = note.noteTitle
-            binding.noteBody.text = note.noteText
+            binding.note = note
+            binding.executePendingBindings()
         }
     }
 
@@ -38,9 +37,11 @@ class NoteAdapter : ListAdapter<Note,
     }
 
     override fun onBindViewHolder(holder: NoteAdapter.NoteViewHolder, position: Int) {
-        val note = getItem(position)
-        holder.bind(note)
-
+        val current = getItem(position)
+        holder.itemView.setOnClickListener {
+            onItemClicked(current)
+        }
+        holder.bind(current)
     }
     companion object DiffCallback : DiffUtil.ItemCallback<Note>() {
 
