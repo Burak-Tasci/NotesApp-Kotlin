@@ -1,8 +1,9 @@
-package com.tsci.notesapp
+package com.tsci.notesapp.ui.viewmodel
 
 import androidx.lifecycle.*
 import com.tsci.notesapp.data.NoteDao
 import com.tsci.notesapp.data.Note
+import com.tsci.notesapp.ui.NotesFragment
 import kotlinx.coroutines.launch
 import java.util.*
 
@@ -53,8 +54,8 @@ class AppViewModel(private val noteDao: NoteDao) : ViewModel() {
             noteDao.insert(note)
         }
     }
-    private fun getNewNoteEntry(noteText: String,
-                                noteTitle: String,
+    private fun getNewNoteEntry(noteTitle: String,
+                                noteText: String,
                                 noteDate: Date): Note {
         return Note(
             noteText = noteText,
@@ -71,6 +72,8 @@ class AppViewModel(private val noteDao: NoteDao) : ViewModel() {
     fun retrieveNote(id: Long): LiveData<Note>{
         return noteDao.getNote(id).asLiveData()
     }
+
+
 }
 
 
