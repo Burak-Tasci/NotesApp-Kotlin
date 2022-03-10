@@ -19,5 +19,14 @@
         android:id="@+id/editNoteFragment"
         android:name="com.tsci.notesapp.ui.EditNoteFragment"
         android:label="edit_note_fragment"
-        tools:layout="@layout/edit_note_fragment" />
+        tools:layout="@layout/edit_note_fragment" >
+        <action
+            android:id="@+id/action_editNoteFragment_to_notesFragment"
+            app:destination="@id/notesFragment"
+            app:popUpTo="@id/notesFragment"
+            app:popUpToInclusive="true" />
+        <argument
+            android:name="itemId"
+            app:argType="long" />
+    </fragment>
 </navigation>
