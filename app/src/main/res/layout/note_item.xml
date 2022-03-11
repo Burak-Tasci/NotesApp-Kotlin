@@ -51,7 +51,7 @@
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="title1" />
+                tools:text="TitleTitleTitleTitleTitle" />
 
             <TextView
                 android:id="@+id/note_date"
@@ -62,7 +62,7 @@
                 app:layout_constraintBottom_toBottomOf="@id/note_title"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/note_title"
-                tools:text="Sun May 02 21:00:18 GMT 2021" />
+                tools:text="14.12.2021" />
 
             <TextView
                 android:id="@+id/note_body"
@@ -70,7 +70,9 @@
                 android:text="@{note.noteText}"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                android:maxLines="10"
+                android:ellipsize="end"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 app:layout_constraintStart_toStartOf="@id/note_title"
                 app:layout_constraintTop_toBottomOf="@id/note_title"
                 tools:text="body1"/>
