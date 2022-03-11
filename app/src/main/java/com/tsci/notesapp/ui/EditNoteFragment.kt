@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -64,23 +65,35 @@ class EditNoteFragment : Fragment() {
         }
 
         binding.saveFab.setOnClickListener {
-            if (id == -1L){
-                viewModel.addNewNote(
-                    noteTitle = binding.titleEditText.text.toString(),
-                    noteText =  binding.bodyEditText.text.toString(),
-                    noteDate = Date(Date().time / 1000L)
-                )
+            if(!binding.titleEditText.text.isNullOrBlank() && !binding.bodyEditText.text.isNullOrBlank()){
+                if (id == -1L){
+                    viewModel.addNewNote(
+                        noteTitle = binding.titleEditText.text.toString(),
+                        noteText =  binding.bodyEditText.text.toString(),
+                        noteDate = Date(Date().time / 1000L)
+                    )
+                }
+                else{
+                    viewModel.updateNote(
+                        Id = note.id,
+                        noteTitle = binding.titleEditText.text.toString(),
+                        noteText =  binding.bodyEditText.text.toString(),
+                        noteDate = Date(Date().time / 1000L)
+                    )
+                }
+                val action = EditNoteFragmentDirections.actionEditNoteFragmentToNotesFragment()
+                findNavController().navigate(action)
+            }
+            else if (binding.titleEditText.text.isNullOrBlank() && binding.bodyEditText.text.isNullOrBlank()){
+                Toast.makeText(context, "Fields must be filled!", Toast.LENGTH_SHORT).show()
+            }
+            else if (binding.titleEditText.text.isNullOrBlank()){
+                Toast.makeText(context, "Title field must be filled!", Toast.LENGTH_SHORT).show()
             }
             else{
-                viewModel.updateNote(
-                    Id = note.id,
-                    noteTitle = binding.titleEditText.text.toString(),
-                    noteText =  binding.bodyEditText.text.toString(),
-                    noteDate = Date(Date().time / 1000L)
-                )
+                Toast.makeText(context, "Body field must be filled!", Toast.LENGTH_SHORT).show()
             }
-            val action = EditNoteFragmentDirections.actionEditNoteFragmentToNotesFragment()
-            findNavController().navigate(action)
+
         }
     }
     private fun bind(note: Note): Unit {
