@@ -11,11 +11,6 @@ import java.util.*
 class AppViewModel(private val noteDao: NoteDao) : ViewModel() {
     val allNotes: LiveData<List<Note>> = noteDao.getAllNotes().asLiveData()
 
-    @ColorRes
-    private var _theme =  MutableLiveData<Int?>()
-
-    val theme get() = _theme
-
 
     private fun getUpdatedNoteEntry(
         Id: Long,
@@ -84,11 +79,6 @@ class AppViewModel(private val noteDao: NoteDao) : ViewModel() {
         return noteDao.getNote(id).asLiveData()
     }
 
-    // TODO Change color attribute's datatype Int to LiveData<Int>
-    fun setTheme(@ColorRes color: Int) {
-        _theme.value = color
-        Log.d("AppViewModel", "${_theme}")
-    }
 }
 
 class AppViewModelFactory(private val noteDao: NoteDao) : ViewModelProvider.Factory {
