@@ -1,5 +1,6 @@
 package com.tsci.notesapp.ui
 
+
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +10,6 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tsci.notesapp.NotesApplication
-import com.tsci.notesapp.R
 import com.tsci.notesapp.databinding.FragmentNotesBinding
 import com.tsci.notesapp.ui.adapter.NoteAdapter
 import com.tsci.notesapp.ui.viewmodel.AppViewModel
@@ -29,21 +29,22 @@ class NotesFragment : Fragment() {
     // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
 
+    // Keeps track of which LayoutManager is in use for the [RecyclerView]
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentNotesBinding.inflate(inflater, container, false)
-        val view = binding.root
-        return view
+        return binding.root
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         val noteAdapter = NoteAdapter{
             val action = NotesFragmentDirections.actionNotesFragmentToEditNoteFragment(it.id)
             this.findNavController().navigate(action)
@@ -53,7 +54,7 @@ class NotesFragment : Fragment() {
             adapter = noteAdapter
         }
         viewModel.allNotes.observe(this.viewLifecycleOwner) { notes ->
-            notes.let {
+            notes.let { it ->
                 noteAdapter.submitList(it.sortedByDescending { it.noteDate })
             }
         }
@@ -61,5 +62,6 @@ class NotesFragment : Fragment() {
             val action = NotesFragmentDirections.actionNotesFragmentToEditNoteFragment(-1L)
             findNavController().navigate(action)
         }
+
     }
 }

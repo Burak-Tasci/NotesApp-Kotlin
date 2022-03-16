@@ -21,7 +21,6 @@ class NoteAdapter(private val onItemClicked: (Note) -> Unit) : ListAdapter<Note,
         fun bind(note: Note){
             Log.d("NoteAdapter", Date(note.noteDate.time).toString())
             binding.note = note
-            binding.executePendingBindings()
         }
     }
 
