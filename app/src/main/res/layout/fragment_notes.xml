@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <SearchView
+            <androidx.appcompat.widget.SearchView
                 android:id="@+id/search"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -46,6 +46,7 @@
                 android:id="@+id/add_note_fab"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:backgroundTint="@color/design_default_color_secondary_variant"
                 android:layout_marginEnd="@dimen/margin"
                 android:layout_marginBottom="@dimen/margin"
                 android:src="@drawable/ic_baseline_create_24"
