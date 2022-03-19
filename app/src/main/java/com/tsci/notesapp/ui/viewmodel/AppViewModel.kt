@@ -1,7 +1,5 @@
 package com.tsci.notesapp.ui.viewmodel
 
-import android.util.Log
-import androidx.annotation.ColorRes
 import androidx.lifecycle.*
 import com.tsci.notesapp.data.NoteDao
 import com.tsci.notesapp.data.Note
@@ -79,6 +77,9 @@ class AppViewModel(private val noteDao: NoteDao) : ViewModel() {
         return noteDao.getNote(id).asLiveData()
     }
 
+    fun searchNotes(searchQuery: String): LiveData<List<Note>>{
+        return noteDao.searchNotes(searchQuery).asLiveData()
+    }
 }
 
 class AppViewModelFactory(private val noteDao: NoteDao) : ViewModelProvider.Factory {
