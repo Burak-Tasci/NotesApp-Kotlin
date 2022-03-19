@@ -20,4 +20,7 @@ interface NoteDao {
 
     @Query("SELECT * from Note ORDER BY note_date DESC")
     fun getAllNotes(): Flow<List<Note>>
+
+    @Query("SELECT * FROM note WHERE note_title LIKE :searchQuery")
+    fun searchNotes(searchQuery: String): Flow<List<Note>>
 }
