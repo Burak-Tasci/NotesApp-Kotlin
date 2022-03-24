@@ -46,7 +46,7 @@
                 android:id="@+id/add_note_fab"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/design_default_color_secondary_variant"
+                android:backgroundTint="?attr/colorSecondaryVariant"
                 android:layout_marginEnd="@dimen/margin"
                 android:layout_marginBottom="@dimen/margin"
                 android:src="@drawable/ic_baseline_create_24"
