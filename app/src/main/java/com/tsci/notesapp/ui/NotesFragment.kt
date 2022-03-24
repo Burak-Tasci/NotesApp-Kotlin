@@ -1,5 +1,6 @@
 package com.tsci.notesapp.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -99,6 +100,14 @@ class NotesFragment : Fragment(), SearchView.OnQueryTextListener {
 
         when(item.itemId){
             R.id.menu_delete -> viewModel.deleteNote(noteAdapter.selectedNote)
+            R.id.menu_share -> {
+                val intent = Intent(Intent.ACTION_SEND)
+                    .setType("text/plain")
+                    .putExtra(Intent.EXTRA_TEXT, noteAdapter.selectedNote.noteText)
+                if (activity?.packageManager?.resolveActivity(intent, 0) != null) {
+                    startActivity(intent)
+                }
+            }
         }
         return super.onContextItemSelected(item)
     }

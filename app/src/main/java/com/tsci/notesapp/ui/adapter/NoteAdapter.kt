@@ -40,6 +40,9 @@ class NoteAdapter(private val onItemClicked: (Note) -> Unit) : ListAdapter<Note,
             menu?.add(
                 Menu.NONE, R.id.menu_delete,
                 Menu.NONE, R.string.delete_note);
+            menu?.add(
+                Menu.NONE, R.id.menu_share,
+                Menu.NONE, R.string.share_note);
         }
     }
 
