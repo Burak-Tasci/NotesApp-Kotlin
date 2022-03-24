@@ -1,15 +1,15 @@
 package com.tsci.notesapp.ui
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.util.Log
+import android.view.*
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tsci.notesapp.NotesApplication
+import com.tsci.notesapp.R
 import com.tsci.notesapp.databinding.FragmentNotesBinding
 import com.tsci.notesapp.ui.adapter.NoteAdapter
 import com.tsci.notesapp.ui.viewmodel.AppViewModel
@@ -67,6 +67,7 @@ class NotesFragment : Fragment(), SearchView.OnQueryTextListener {
 
         binding.search.setOnQueryTextListener(this)
 
+        registerForContextMenu(binding.recyclerNotes)
     }
 
     override fun onQueryTextSubmit(query: String?): Boolean {
@@ -92,5 +93,13 @@ class NotesFragment : Fragment(), SearchView.OnQueryTextListener {
                 }
         })
 
+    }
+
+    override fun onContextItemSelected(item: MenuItem): Boolean {
+
+        when(item.itemId){
+            R.id.menu_delete -> viewModel.deleteNote(noteAdapter.selectedNote)
+        }
+        return super.onContextItemSelected(item)
     }
 }
