@@ -15,5 +15,8 @@
     <color name="yellow_theme">#FFFF00</color>
     <color name="blue_theme">#1E90FF</color>
 
+    <!-- strokeColor -->
+    <color name="light_green">#34eb8f</color>
+
 
 </resources>
