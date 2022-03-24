@@ -24,13 +24,19 @@
         <variable
             name="note"
             type="com.tsci.notesapp.data.Note" />
+        <variable
+            name="viewModel"
+            type="com.tsci.notesapp.ui.viewmodel.AppViewModel" />
     </data>
 
 
     <com.google.android.material.card.MaterialCardView
+        android:id="@+id/note_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="8dp"
+        app:strokeColor="?attr/colorSecondaryVariant"
+        app:strokeWidth="@dimen/strokeWidth"
         android:layout_marginStart="@dimen/margin"
         android:layout_marginEnd="@dimen/margin"
         android:layout_marginTop="@dimen/margin"

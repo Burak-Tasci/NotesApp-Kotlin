@@ -9,4 +9,5 @@
     <string name="strawberry">Strawberry</string>
     <string name="lemon">Lemon</string>
     <string name="water">Water</string>
+    <string name="delete_note">Delete Note</string>
 </resources>

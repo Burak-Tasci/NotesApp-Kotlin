@@ -3,79 +3,84 @@ package com.tsci.notesapp.ui.viewmodel
 import androidx.lifecycle.*
 import com.tsci.notesapp.data.NoteDao
 import com.tsci.notesapp.data.Note
-import com.tsci.notesapp.ui.NotesFragment
 import kotlinx.coroutines.launch
 import java.util.*
 
 class AppViewModel(private val noteDao: NoteDao) : ViewModel() {
     val allNotes: LiveData<List<Note>> = noteDao.getAllNotes().asLiveData()
 
+
     private fun getUpdatedNoteEntry(
         Id: Long,
-        noteText: String,
         noteTitle: String,
+        noteText: String,
         noteDate: Date
     ): Note {
         return Note(
             id = Id,
-            noteText = noteText,
             noteTitle = noteTitle,
+            noteText = noteText,
             noteDate = noteDate
         )
     }
 
     fun updateNote(
         Id: Long,
-        noteText: String,
         noteTitle: String,
+        noteText: String,
         noteDate: Date
     ) {
         val updatedNote = getUpdatedNoteEntry(Id, noteTitle, noteText, noteDate)
         updateNote(updatedNote)
     }
 
-
-
-    fun deleteNote(note: Note){
+    fun deleteNote(note: Note) {
         viewModelScope.launch {
             noteDao.delete(note)
         }
     }
 
-
-    private fun updateNote(note: Note){
+    private fun updateNote(note: Note) {
         viewModelScope.launch {
             noteDao.update(note)
         }
     }
 
-    private fun insertNote(note: Note){
+    private fun insertNote(note: Note) {
         viewModelScope.launch {
             noteDao.insert(note)
         }
     }
-    private fun getNewNoteEntry(noteTitle: String,
-                                noteText: String,
-                                noteDate: Date): Note {
+
+    private fun getNewNoteEntry(
+        noteTitle: String,
+        noteText: String,
+        noteDate: Date
+    ): Note {
         return Note(
-            noteText = noteText,
             noteTitle = noteTitle,
+            noteText = noteText,
             noteDate = noteDate
         )
     }
-    fun addNewNote(noteText: String,
-                   noteTitle: String,
-                   noteDate: Date) {
+
+    fun addNewNote(
+        noteTitle: String,
+        noteText: String,
+        noteDate: Date
+    ) {
         val newNote = getNewNoteEntry(noteTitle, noteText, noteDate)
         insertNote(newNote)
     }
-    fun retrieveNote(id: Long): LiveData<Note>{
+
+    fun retrieveNote(id: Long): LiveData<Note> {
         return noteDao.getNote(id).asLiveData()
     }
 
-
+    fun searchNotes(searchQuery: String): LiveData<List<Note>>{
+        return noteDao.searchNotes(searchQuery).asLiveData()
+    }
 }
-
 
 class AppViewModelFactory(private val noteDao: NoteDao) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {

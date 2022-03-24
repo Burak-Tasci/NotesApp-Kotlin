@@ -1,27 +1,45 @@
 package com.tsci.notesapp.ui.adapter
 
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.ViewGroup
+import android.view.*
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.tsci.notesapp.R
 import com.tsci.notesapp.data.Note
 import com.tsci.notesapp.databinding.NoteItemBinding
 import java.util.*
 
+
 class NoteAdapter(private val onItemClicked: (Note) -> Unit) : ListAdapter<Note,
         NoteAdapter.NoteViewHolder>(DiffCallback) {
+
+    lateinit var selectedNote: Note
+
 
     class NoteViewHolder(
         private var binding: NoteItemBinding
 
-    ) : RecyclerView.ViewHolder(binding.root) {
+    ) : RecyclerView.ViewHolder(binding.root), View.OnCreateContextMenuListener {
 
-        fun bind(note: Note){
+        init {
+            binding.root.setOnCreateContextMenuListener(this)
+        }
+
+        fun bind(note: Note) {
             Log.d("NoteAdapter", Date(note.noteDate.time).toString())
             binding.note = note
-            binding.executePendingBindings()
+        }
+
+        override fun onCreateContextMenu(
+            menu: ContextMenu?,
+            view: View?,
+            menuInfo: ContextMenu.ContextMenuInfo?
+        ) {
+
+            menu?.add(
+                Menu.NONE, R.id.menu_delete,
+                Menu.NONE, R.string.delete_note);
         }
     }
 
@@ -36,12 +54,23 @@ class NoteAdapter(private val onItemClicked: (Note) -> Unit) : ListAdapter<Note,
         )
     }
 
-    override fun onBindViewHolder(holder: NoteAdapter.NoteViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: NoteAdapter.NoteViewHolder,  position: Int) {
         val current = getItem(position)
+        holder.bind(current)
         holder.itemView.setOnClickListener {
             onItemClicked(current)
         }
-        holder.bind(current)
+        holder.itemView.setOnLongClickListener(object : View.OnLongClickListener {
+            override fun onLongClick(v: View?): Boolean {
+                selectedNote = current
+                return false
+            }
+        })
+    }
+
+    override fun onViewRecycled(holder: NoteViewHolder) {
+        holder.itemView.setOnLongClickListener(null)
+        super.onViewRecycled(holder)
     }
     companion object DiffCallback : DiffUtil.ItemCallback<Note>() {
 
