@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">NotesApp</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="edit_note_title_hint">Enter a title.</string>
+    <string name="edit_note_title_hint">Title</string>
     <string name="enter_note">Enter note.</string>
     <string name="themes">Themes</string>
     <string name="grapes">Grapes</string>
@@ -10,4 +10,5 @@
     <string name="lemon">Lemon</string>
     <string name="water">Water</string>
     <string name="delete_note">Delete Note</string>
+    <string name="share_note">Share Note</string>
 </resources>

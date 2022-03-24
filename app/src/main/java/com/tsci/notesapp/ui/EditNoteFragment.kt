@@ -95,6 +95,8 @@ class EditNoteFragment : Fragment() {
             }
 
         }
+
+        binding.bodyEditText.requestFocus()
     }
     private fun bind(note: Note): Unit {
 
