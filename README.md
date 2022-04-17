@@ -12,7 +12,9 @@
   &nbsp
   <img src="https://user-images.githubusercontent.com/60064340/163708842-9a6cffd0-1217-421b-bc6a-a8e484d2ce59.png" width=20%>  
 </p>
+
 ### Dark Mode
+
 <p>
   <img src="https://user-images.githubusercontent.com/60064340/163708848-d28900eb-15ec-4e63-97b7-417f734b9fdf.png" width=20%>
   &nbsp
